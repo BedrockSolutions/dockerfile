@@ -33,9 +33,6 @@ WORKDIR /app/TFA-Bot
 RUN mono ../nuget.exe restore TFA-Bot.sln
 RUN msbuild -p:Configuration=Release -property:GitCommit=$(git rev-parse HEAD) TFA-Bot.sln
 
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
-
 FROM mono:slim
 
 RUN apt-get update \
