@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 AS build
+FROM mono:latest AS build
 
 ARG BRANCH="master"
 
@@ -7,13 +7,18 @@ ENV TZ=UTC
 RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime
 
 RUN apt-get update \
-	&& apt-get -y install joe less gnupg ssh wget curl net-tools iputils-ping libncurses5-dev autoconf libncursesw5-dev git locales locales-all mtr-tiny
-
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-RUN echo "deb http://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list
-
-RUN apt-get update \
-    && apt-get -y install mono-devel
+	&& apt-get -y install \
+	autoconf \
+  build-essential \
+  git \
+  iputils-ping \
+  libncurses5-dev \
+  libncursesw5-dev \
+  locales \
+  locales-all \
+  net-tools \
+  ssh \
+  wget
 
 RUN mkdir -p /app
 WORKDIR /app
@@ -31,25 +36,27 @@ RUN msbuild -p:Configuration=Release -property:GitCommit=$(git rev-parse HEAD) T
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-FROM ubuntu:18.04
+FROM mono:slim
 
 RUN apt-get update \
-	&& apt-get -y install gnupg mtr-tiny
-
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-RUN echo "deb http://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list
-
-RUN apt-get update \
-  && apt-get -y install \
-    libmono-system-net-http4.0-cil \
-    libmono-system-runtime4.0-cil \
-    libmono-system-runtime-serialization4.0-cil \
-    libmono-system-web-services4.0-cil \
-    mono-runtime
+	&& apt-get -y install \
+  git \
+  iputils-ping \
+  libmono-system-net-http4.0-cil \
+  libmono-system-runtime4.0-cil \
+  libmono-system-runtime-serialization4.0-cil \
+  libmono-system-web-services4.0-cil \
+  libncurses5-dev \
+  libncursesw5-dev \
+  mtr-tiny \
+  net-tools \
+  ssh \
+  wget
 
 COPY --from=build /app/TFA-Bot/TFA-Bot/bin/Release /app/TFA-Bot/TFA-Bot/bin/Release
 
 COPY --from=build /app/TFA-Bot/entrypoint.sh /entrypoint.sh
+
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
