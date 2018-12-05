@@ -14,11 +14,11 @@ WORKDIR /home/node/app
 
 RUN set -xe \
   && git clone https://github.com/Factoshi/factoid-address-monitord.git . \
-  && rm -rf csv config.json.copy README.md \
+  && rm -r csv config.json.copy README.md \
   && npm install \
   && mkdir -p config db/csv \
-  && touch config/default.json db/stopBlocks.json \
-  && ln -s config/default.json config.json \
+  && touch config/config.json db/stopBlocks.json \
+  && ln -s config/config.json config.json \
   && ln -s db/stopBlocks.json stopBlocks.json \
   && ln -s db/csv csv
 
@@ -26,4 +26,4 @@ VOLUME ["/home/node/app/config"]
 
 VOLUME ["/home/node/app/db"]
 
-CMD ["node", "index.js"]
+ENTRYPOINT ["node", "index.js"]
