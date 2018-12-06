@@ -1,3 +1,4 @@
 .dockerignore
+bin
 Dockerfile
 README.md
