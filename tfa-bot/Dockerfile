@@ -20,18 +20,17 @@ RUN apt-get update \
   ssh \
   wget
 
-RUN mkdir -p /app
 WORKDIR /app
-RUN git clone --branch v3.5.2 https://github.com/SIPp/sipp.git
-WORKDIR /app/sipp
-RUN ./build.sh
 
-WORKDIR /app
-RUN git clone -b ${BRANCH} https://git.factoid.org/TFA/TFA-Bot.git
-RUN wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-WORKDIR /app/TFA-Bot
-RUN mono ../nuget.exe restore TFA-Bot.sln
-RUN msbuild -p:Configuration=Release -property:GitCommit=$(git rev-parse HEAD) TFA-Bot.sln
+RUN set -xe \
+  && git clone --branch v3.5.2 https://github.com/SIPp/sipp.git \
+  && git clone -b ${BRANCH} https://git.factoid.org/TFA/TFA-Bot.git \
+  && wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe \
+  && cd sipp \
+  && ./build.sh \
+  && cd ../TFA-Bot \
+  && mono ../nuget.exe restore TFA-Bot.sln \
+  && msbuild -p:Configuration=Release -property:GitCommit=$(git rev-parse HEAD) TFA-Bot.sln
 
 FROM mono:slim
 
@@ -51,7 +50,6 @@ RUN apt-get update \
   wget
 
 COPY --from=build /app/TFA-Bot/TFA-Bot/bin/Release /app/TFA-Bot/TFA-Bot/bin/Release
-
 COPY --from=build /app/TFA-Bot/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
