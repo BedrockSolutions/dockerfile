@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NAMESPACE='bedrocksolutions'
-IMAGE_NAME='tfa-bot'
+IMAGE_NAME='tfa-bot-slim'
 
 set -xe
 
