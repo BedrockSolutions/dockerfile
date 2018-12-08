@@ -1,6 +1,11 @@
-# tfa-bot
-Dockerfile for https://git.factoid.org/TFA/TFA-Bot, focused on
-small image size:
+# tfa-bot-slim
 
-  * Based on Alpine Linux
-  * Multi-stage build
+Dockerfile for the amazing TFA Bot (https://git.factoid.org/TFA/TFA-Bot), focused on
+small image size.
+
+This image does not contain a build environment. As such, all bot commands that relate to
+the build in some way do not work. The following commands will not work correctly:
+
+  * bot update
+  * bot previous
+  * git
