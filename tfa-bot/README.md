@@ -1,6 +1,4 @@
 # tfa-bot
-Dockerfile for https://git.factoid.org/TFA/TFA-Bot, focused on
-small image size:
+Dockerfile for the marvelous TFA Bot (https://git.factoid.org/TFA/TFA-Bot).
 
-  * Based on Alpine Linux
-  * Multi-stage build
+This is simply an alternate build that supports all bot features.
