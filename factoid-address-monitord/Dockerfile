@@ -3,7 +3,9 @@ FROM node:alpine
 USER root
 
 RUN set -xe \
-  && apk add --no-cache git
+  && apk add --no-cache \
+    gettext \
+    git
 
 USER node
 
@@ -14,15 +16,15 @@ WORKDIR /home/node/app
 
 RUN set -xe \
   && git clone https://github.com/Factoshi/factoid-address-monitord.git . \
-  && rm -r csv config.json.copy README.md \
   && npm install \
-  && mkdir -p config db/csv \
+  && mkdir -p config csv db \
   && touch config/config.json db/stopBlocks.json \
   && ln -s config/config.json config.json \
-  && ln -s db/stopBlocks.json stopBlocks.json \
-  && ln -s db/csv csv
+#  && ln -s db/stopBlocks.json stopBlocks.json \
 
 VOLUME ["/home/node/app/config"]
+
+VOLUME ["/home/node/app/csv"]
 
 VOLUME ["/home/node/app/db"]
 
