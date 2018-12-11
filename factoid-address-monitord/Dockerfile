@@ -15,17 +15,17 @@ RUN mkdir /home/node/app
 WORKDIR /home/node/app
 
 RUN set -xe \
-  && git clone https://github.com/Factoshi/factoid-address-monitord.git . \
-  && npm install \
-  && mkdir -p config csv db \
-  && touch config/config.json db/stopBlocks.json \
-  && ln -s config/config.json config.json \
-#  && ln -s db/stopBlocks.json stopBlocks.json \
+  && git clone https://github.com/BedrockSolutions/factoid-address-monitord.git . \
+  && npm install
 
-VOLUME ["/home/node/app/config"]
+COPY ./entrypoint.sh .
+
+VOLUME ["/home/node/app/conf-template"]
 
 VOLUME ["/home/node/app/csv"]
 
 VOLUME ["/home/node/app/db"]
 
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["./entrypoint.sh"]
+
+CMD ["node", "index.js"]
