@@ -38,6 +38,7 @@ RUN set -xe && \
   ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime && \
   ln -fs /home/tfa-bot /app && \
   cp /home/tfa-bot/TFA-Bot/entrypoint.sh / && \
+  chown -R tfa-bot:tfa-bot /home/tfa-bot && \
   chmod +x /entrypoint.sh
 
 USER tfa-bot
