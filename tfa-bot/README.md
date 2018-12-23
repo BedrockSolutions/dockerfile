@@ -1,21 +1,21 @@
 # TFA Bot
 
-Docker images of the wonderful TFA Bot, developed by The Factoid Authority.
+Docker image of the wonderful TFA Bot, developed by The Factoid Authority.
   
   * [Website (*www.factoid.org*)](http://www.factoid.org)
   
   * [Github (*git.factoid.org*)](https://git.factoid.org/TFA/TFA-Bot)
 
-## Supported tags and Dockerfile links
+## Supported tag and Dockerfile link
 
 * [`latest` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/master/tfa-bot/Dockerfile)
   
-## Environment variables
+## Environment variable
 
 The image requires a single environment variable:
 
-* **BOTURL**: The URL of Google Sheet configuration
+* **BOTURL**: The URL to the Google Sheet configuration document.
 
 ## Example
 
-`docker run  -e 'BOTURL=https://url.of.google.sheet' --name tfa-bot bedrocksolutions/tfa-bot:latest`
+`docker run  -e 'BOTURL=https://url.to.google.sheet.conf' --name tfa-bot bedrocksolutions/tfa-bot:latest`

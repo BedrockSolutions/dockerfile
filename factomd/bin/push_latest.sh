@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 NAMESPACE='bedrocksolutions'
-IMAGE_NAME='tfa-bot'
-TAG='slim'
+IMAGE_NAME='factomd'
+TAG='latest'
 
 set -xe
 
