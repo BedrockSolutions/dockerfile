@@ -14,4 +14,6 @@ set -e
   done
 } &
 
+envsubst < ~/.factom/private/factomd.conf > ~/.factom/private-conv/factomd.conf
+
 exec /go/bin/factomd "$@"
