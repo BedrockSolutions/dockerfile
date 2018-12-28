@@ -1,12 +1,16 @@
 # Factomd
 
-Custom factomd image, for use with the [Bedrock Solutions Helm chart](https://github.com/BedrockSolutions/helm/factomd)
-    
-  * [Github](https://github.com/BedrockSolutions/dockerfile/factomd)
+Custom factomd image, for use with the Helm chart listed below.
+
+## Useful Links
+
+  * [Factomd Helm Chart](https://github.com/BedrockSolutions/helm/factomd)
+      
+  * [Base Image](https://hub.docker.com/r/factominc/factomd)
 
 ## Supported tags and Dockerfile links
 
-* [`latest` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/master/tfa-bot/Dockerfile)
+* [`latest` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/master/factomd/Dockerfile)
   
 ## Volumes
 
