@@ -4,7 +4,7 @@ set -e
 
 {
   while true; do
-    inotifywait -m ~/.factom/private -e close_write |
+    inotifywait -m ~/.factom/private -e close_write -r |
       while read path action file; do
         echo "inotifywait: ${action} event on ${path}${file}"
         if [ -f "~/.factom/private/factomd.conf" ] ; then

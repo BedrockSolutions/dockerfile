@@ -1,38 +1,35 @@
-# TFA Bot
+# Factomd
 
-Docker images of the wonderful TFA Bot, developed by The Factoid Authority.
-  
-  * [Website (*www.factoid.org*)](http://www.factoid.org)
-  
-  * [Github (*git.factoid.org*)](https://git.factoid.org/TFA/TFA-Bot)
+Custom factomd image, for use with the [Bedrock Solutions Helm chart](https://github.com/BedrockSolutions/helm/factomd)
+    
+  * [Github](https://github.com/BedrockSolutions/dockerfile/factomd)
 
 ## Supported tags and Dockerfile links
 
 * [`latest` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/master/tfa-bot/Dockerfile)
-
-* [`1.12` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/tfa-bot-1.12/tfa-bot/Dockerfile)
-
-* [`slim` (*Dockerfile.slim*)](https://github.com/BedrockSolutions/dockerfile/blob/master/tfa-bot/Dockerfile.slim)
-
-* [`1.1.12-slim` (*Dockerfile.slim*)](https://github.com/BedrockSolutions/dockerfile/blob/tfa-bot-1.12/tfa-bot/Dockerfile.slim)
-
-## Image types
-
-* Regular: `latest` & `1.12`
-  > This image supports all features. Use this one if you want to update your bot via the
-  discord command `bot update`
-
-* Slim: `slim` & `1.12-slim`
-  > This image lacks a build environment. The discord commands `bot update` and `git` do not
-  work. Use this image if you are concerned about image size, and plan on updating your bot
-  via a `docker pull`.
   
+## Volumes
+
+Two volumes must be attached:
+
+### Database Volume
+
+* `/home/factomd/.factom/m2`: Mount a suitable volume here for storage of the blockchain 
+database.
+
+### Configuration Volume
+
+* `/home/factomd/.factom/private`: Mount a directory here that contains the `factomd.conf`
+configuration file.
+
 ## Environment variables
 
-The image requires a single environment variable:
+The image can accept a single, optional, environment variable:
 
-* **BOTURL**: The URL of Google Sheet configuration
+* **LOCAL_SERVER_PRIVATE_KEY**: The server identity's private key 
 
-## Example
-
-`docker run  -e 'BOTURL=https://url.of.google.sheet' --name tfa-bot bedrocksolutions/tfa-bot:1.12-slim`
+In order for that environment variable to make its way into the configuration, the `factomd.conf`
+configuration file must have the `LocalServerPrivKey` set as follows:
+```
+LocalServerPrivKey=${LOCAL_SERVER_PRIVATE_KEY}
+```

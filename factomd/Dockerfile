@@ -19,4 +19,4 @@ VOLUME /home/factomd/.factom/private
 
 USER factomd
 
-ENTRYPOINT ["./entrypoint.sh", "-config=/home/factomd/.factomd/private-conv/factomd.conf"]
+ENTRYPOINT ["./entrypoint.sh", "-config=/home/factomd/.factom/private-conv/factomd.conf"]
