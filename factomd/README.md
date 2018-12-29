@@ -4,7 +4,7 @@ Custom factomd image, for use with the Helm chart listed below.
 
 ## Useful Links
 
-  * [Factomd Helm Chart](https://github.com/BedrockSolutions/helm/factomd)
+  * [Factomd Helm Chart](https://github.com/BedrockSolutions/helm/tree/master/factomd)
       
   * [Base Image](https://hub.docker.com/r/factominc/factomd)
 
@@ -18,12 +18,12 @@ Two volumes must be attached:
 
 ### Database Volume
 
-* `/home/factomd/.factom/m2`: Mount a suitable volume here for storage of the blockchain 
+* *`/home/factomd/.factom/m2`*: Mount a suitable volume here for storage of the blockchain 
 database.
 
 ### Configuration Volume
 
-* `/home/factomd/.factom/private`: Mount a directory here that contains the `factomd.conf`
+* *`/home/factomd/.factom/private`*: Mount a directory here that contains the `factomd.conf`
 configuration file.
 
 ## Environment variables
