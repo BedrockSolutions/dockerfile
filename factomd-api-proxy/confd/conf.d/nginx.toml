@@ -1,0 +1,12 @@
+[template]
+src = "nginx.tmpl"
+dest = "/etc/nginx/conf.d/default.conf"
+owner = "nginx"
+mode = "0644"
+keys = [
+  "/allowed/origins",
+  "/allow/credentials",
+  "/api/port",
+  "/port",
+]
+check_cmd = "/usr/local/openresty/bin/openresty -t -c {{.src}}"
