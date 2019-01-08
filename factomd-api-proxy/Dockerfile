@@ -1,31 +1,27 @@
-FROM node:alpine
+FROM openresty/openresty:stretch
 
-USER root
+COPY confd /etc/confd
 
-RUN set -xe \
-  && apk add --no-cache \
-    gettext \
-    git
+ADD https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 /usr/local/bin/confd
+#COPY ./bin/confd /usr/local/bin/confd
 
-USER node
+RUN set -xe && \
+  groupadd -g 1000 nginx && \
+  useradd -r -m -u 1000 -g nginx nginx && \
+  chown -R nginx:nginx /usr/local/openresty && \
+  chmod +x /usr/local/bin/confd && \
+  ln -fs /home/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Create the working dir as node. Otw it gets created as root
-RUN mkdir /home/node/app
+WORKDIR /home/nginx
 
-WORKDIR /home/node/app
+USER nginx
 
-RUN set -xe \
-  && git clone https://github.com/BedrockSolutions/factoid-address-monitord.git . \
-  && npm install
+COPY ./entrypoint.sh ./
 
-COPY ./entrypoint.sh .
-
-VOLUME ["/home/node/app/conf-template"]
-
-VOLUME ["/home/node/app/csv"]
-
-VOLUME ["/home/node/app/db"]
+ENV ALLOW_ORIGIN ""
+ENV API_PORT 8088
+ENV PORT 8087
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-CMD ["node", "index.js"]
+CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]

@@ -2,6 +2,6 @@
 
 set -e
 
-envsubst < ./conf-template/config.json > ./conf/config.json
+confd -onetime -backend env
 
 exec "$@"

@@ -27,5 +27,3 @@ VOLUME ["/home/node/app/csv"]
 VOLUME ["/home/node/app/db"]
 
 ENTRYPOINT ["./entrypoint.sh"]
-
-CMD ["node", "index.js"]
