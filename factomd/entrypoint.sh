@@ -14,4 +14,4 @@ set -e
 
 envsubst < ~/.factom/private/factomd.conf > ~/.factom/private-conv/factomd.conf
 
-exec /go/bin/factomd "$@"
+exec /go/bin/factomd -nodename=${NODE_NAME} "$@"
