@@ -19,4 +19,6 @@ VOLUME /home/factomd/.factom/private
 
 USER factomd
 
+ENV LOCAL_SERVER_PRIVATE_KEY ""
+
 ENTRYPOINT ["./entrypoint.sh", "-config=/home/factomd/.factom/private-conv/factomd.conf"]
