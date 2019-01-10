@@ -2,7 +2,7 @@
 
 A lightweight proxy, custom-built to enhance the factomd API port.
 
-##Features:
+## Features:
 
 * **CORS support:** Full, spec-compliant functionality, including wildcard support and
 regular expression syntax for specifying allowed origins.
