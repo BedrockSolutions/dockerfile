@@ -4,8 +4,8 @@ A lightweight proxy, custom-built to enhance the factomd API port.
 
 ## Features:
 
-* **CORS support:** Full, spec-compliant functionality, including wildcard support and
-regular expression syntax for specifying allowed origins.
+* **CORS support:** Includes wildcard support and Lua pattern syntax for specifying 
+allowed origins.
 
 * **Health check support:** The `GET /` path returns a `200 OK`, which allows the API to
 work correctly with cloud provider infrastructure, such as the GCP HTTP load balancer.
@@ -23,6 +23,8 @@ passed through to factomd, increasing security.
 
 * [`latest` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/master/factomd-api-proxy/Dockerfile)
   
+* [`0.1.0` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/factomd-api-proxy-0.1.0/factomd-api-proxy/Dockerfile)
+
 ## Environment variables
 
 The image can accept three, optional, environment variables:
