@@ -1,6 +1,12 @@
 # Factomd
 
-Custom factomd image, for use with the Helm chart listed below.
+Extension of the base factomd image. Features: 
+
+  * The factomd process no longer runs as root.
+  
+  * The server private key can be passed via an environment variable.
+  
+  * Dovetails nicely with the Helm chart listed below.
 
 ## Useful Links
 
@@ -11,6 +17,8 @@ Custom factomd image, for use with the Helm chart listed below.
 ## Supported tags and Dockerfile links
 
 * [`latest` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/master/factomd/Dockerfile)
+
+* [`0.1.0` (*Dockerfile*)](https://github.com/BedrockSolutions/dockerfile/blob/factomd-0.1.0/factomd/Dockerfile)
   
 ## Volumes
 
