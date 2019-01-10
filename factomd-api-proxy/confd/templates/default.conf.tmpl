@@ -1,4 +1,5 @@
 {{- $allowOrigin := getv "/allow/origin" -}}
+{{- $apiHostname := getv "/api/hostname" -}}
 {{- $apiPort := getv "/api/port" -}}
 {{- $port := getv "/port" -}}
 server {
@@ -80,7 +81,7 @@ server {
       end
 
       local function handle_post(allow_origin, origin)
-        if is_origin_allowed(allow_origin, origin)
+        if not is_cors_disabled(allow_origin) and is_origin_allowed(allow_origin, origin)
         then
           set_common_cors_headers(allow_origin, origin)
         end
@@ -101,7 +102,7 @@ server {
       end
     }
 
-    proxy_pass http://localhost:{{ $apiPort }};
+    proxy_pass http://{{ $apiHostname }}:{{ $apiPort }};
   }
 
   location / {

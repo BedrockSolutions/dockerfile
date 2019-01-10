@@ -19,6 +19,7 @@ USER nginx
 COPY ./entrypoint.sh ./
 
 ENV ALLOW_ORIGIN ""
+ENV API_HOSTNAME "localhost"
 ENV API_PORT 8088
 ENV PORT 8087
 

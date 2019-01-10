@@ -42,6 +42,8 @@ The image can accept three, optional, environment variables:
     * `^https?://.*foo%.com$`: Matches all origins ending in `foo.com`. Both http
     and https URLs match.
     
+* **`API_HOSTNAME`:** The hostname of the factomd instance. Defaults to `localhost`.
+
 * **`API_PORT`:** The API port on the factomd instance. Defaults to `8088`.
 
 * **`PORT`:** The port the proxy will listen on. Defaults to `8087`.
