@@ -1,4 +1,4 @@
-FROM factominc/factomd:v6.1.0-alpine
+FROM factominc/factomd:v6.1.1-rc1-alpine
 
 WORKDIR /home/factomd
 
